@@ -5,16 +5,17 @@ import com.alibaba.excel.EasyExcel;
 import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.entity.vo.TeachQuery;
-import com.atguigu.eduservice.service.EduTeacherService;
+//import com.atguigu.eduservice.service.EduTeacherService;
 import com.atguigu.servicebase.exceptionHandler.GuliException;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+//import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+//import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +33,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/eduservice/edu-teacher")
 public class EduTeacherController {
-    @Autowired
-    private EduTeacherService eduTeacherService;
+//    @Autowired
+//    private EduTeacherService eduTeacherService;
     //查询所有讲师
     @GetMapping("findAll")
     @ApiOperation(value = "查询所有讲师")
     public R findall(){
-        List<EduTeacher> list = eduTeacherService.list(null);
+        //List<EduTeacher> list = eduTeacherService.list(null);
+        List<EduTeacher> list = new ArrayList<EduTeacher>();
         return R.ok().data("items", list);
     }
 
@@ -47,7 +49,8 @@ public class EduTeacherController {
     @ApiImplicitParam(name = "id", value = "讲师ID", required = true, paramType = "path", dataType = "String")
     @ApiOperation(value = "ID逻辑删除讲师")
     public R removeTeacher(@PathVariable String id){
-        boolean flag = eduTeacherService.removeById(id);
+        //boolean flag = eduTeacherService.removeById(id);
+        boolean flag = false;
         if(flag){
             return R.ok();
         }
@@ -64,13 +67,13 @@ public class EduTeacherController {
     @ApiOperation(value = "分页查询讲师")
     public R pageTeacher(@PathVariable Long current,
                          @PathVariable Long limit){
-        Page<EduTeacher> page = new Page<EduTeacher>(current, limit);
-        eduTeacherService.page(page, null);
-        long total = page.getTotal();
-        List<EduTeacher> list = page.getRecords();
+    //    Page<EduTeacher> page = new Page<EduTeacher>(current, limit);
+        //eduTeacherService.page(page, null);
+     //   long total = page.getTotal();
+     //   List<EduTeacher> list = page.getRecords();
         Map map = new HashMap();
-        map.put("total", total);
-        map.put("rows", list);
+    //    map.put("total", total);
+     //   map.put("rows", list);
         return R.ok().data(map);
     }
     //条件查询
@@ -83,28 +86,30 @@ public class EduTeacherController {
     public R pageTeacherCondition(@PathVariable Long current,
                                   @PathVariable Long limit,
                                   @RequestBody(required = false) TeachQuery teachQuery){
-        Page<EduTeacher> page = new Page<EduTeacher>(current, limit);
-        QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper();
+       // Page<EduTeacher> page = new Page<EduTeacher>(current, limit);
+       // QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper();
         String name = teachQuery.getName();
         Integer level = teachQuery.getLevel();
         String begin = teachQuery.getBegin();
         String end = teachQuery.getEnd();
         if (!StringUtils.isEmpty(level)) {
-            queryWrapper.eq("level", level);
+            //queryWrapper.eq("level", level);
         }
         if (!StringUtils.isEmpty(name)) {
-            queryWrapper.like("name", name);
+            //queryWrapper.like("name", name);
         }
         if (!StringUtils.isEmpty(begin)) {
-            queryWrapper.ge("gmt_create", begin);
+            //queryWrapper.ge("gmt_create", begin);
         }
         if (!StringUtils.isEmpty(end)) {
-            queryWrapper.le("gmt_create", end);
+           // queryWrapper.le("gmt_create", end);
         }
-        queryWrapper.orderByDesc("gmt_create");
-        eduTeacherService.page(page, queryWrapper);
-        long total = page.getTotal();
-        List<EduTeacher> list = page.getRecords();
+        //queryWrapper.orderByDesc("gmt_create");
+        //eduTeacherService.page(page, queryWrapper);
+        //long total = page.getTotal();
+        long total = 1;
+        //List<EduTeacher> list = page.getRecords();
+        List<EduTeacher> list = new ArrayList<EduTeacher>();
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("total", total);
         map.put("rows", list);
@@ -114,7 +119,8 @@ public class EduTeacherController {
     @ApiOperation(value = "新增讲师")
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher){
-        boolean save = eduTeacherService.save(eduTeacher);
+        //boolean save = eduTeacherService.save(eduTeacher);
+        boolean save =false;
         return save?R.ok():R.error();
     }
 
@@ -122,14 +128,16 @@ public class EduTeacherController {
     @GetMapping("getTeacher/{id}")
     @ApiImplicitParam(name = "id", value = "讲师ID", required = true, paramType = "path", dataType = "String")
     public R getTeacher(@PathVariable String id){
-        EduTeacher eduTeacher = eduTeacherService.getById(id);
+        //EduTeacher eduTeacher = eduTeacherService.getById(id);
+        EduTeacher eduTeacher = new EduTeacher();
         return R.ok().data("items", eduTeacher);
     }
 
     @ApiOperation(value = "讲师修改")
     @PutMapping("updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
-        boolean flag = eduTeacherService.updateById(eduTeacher);
+        //boolean flag = eduTeacherService.updateById(eduTeacher);
+        boolean flag = false;
         return flag ? R.ok() : R.error();
     }
 
