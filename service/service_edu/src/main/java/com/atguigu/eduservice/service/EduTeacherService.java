@@ -1,7 +1,7 @@
 package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduTeacher;
-//import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.atguigu.eduservice.entity.EduTeacher;
  * @author twp
  * @since 2021-08-25
  */
-//public interface EduTeacherService extends IService<EduTeacher> {
-//
-//}
+public interface EduTeacherService extends IService<EduTeacher> {
+
+}
