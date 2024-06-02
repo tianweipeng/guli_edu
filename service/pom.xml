@@ -34,7 +34,7 @@
             <artifactId>service_base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--        service_base 已经引入common-utils maven依赖传递 -->
+<!--        service_base 已经引入common-utils maven依赖传递 -->
 <!--        <dependency>-->
 <!--            <groupId>com.atguigu</groupId>-->
 <!--            <artifactId>comment_utils</artifactId>-->
